@@ -1,0 +1,15 @@
+hydra-core
+einops
+clip @ git+https://github.com/openai/CLIP.git
+scipy
+cloudpickle
+runstats
+ipyvolume
+scikit-learn
+fire
+faiss-cpu
+bidict
+textdistance
+hdbscan
+termcolor
+torch==1.13.0

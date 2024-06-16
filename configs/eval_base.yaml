@@ -1,0 +1,33 @@
+hydra:
+  job:
+    name: eval_base
+    chdir: false
+  run:
+    dir: outputs/${hydra.job.name}/${now:%Y-%m-%d_%H-%M}
+  
+output_dir: ${hydra:run.dir}
+# ---------------------------------------------------------#
+
+  
+clear_output: True
+
+eval:
+  episode_num: 1
+  episode_length: 25
+  start_episode: 0
+  headless: true
+  device: 0
+
+  model_paths: 
+    region_match:  "./weights/region_match_44999.pth"
+    invariant_region:  "./weights/invariant_region_44999.pth"
+    region_match_fine:  "./weights/region_match_fine_40000.pth"
+
+  agent:
+    min_episodes_per_desc: -1
+    support_episode: -1 # just for debug
+    debug: False
+
+
+testset_path: ./datasets/base_tests
+demoset_path: ./datasets/base_demonstrations

@@ -1,0 +1,53 @@
+hydra:
+  job:
+    name: train_invariant_region
+    chdir: false
+  run:
+    dir: outputs/${hydra.job.name}/${now:%Y-%m-%d_%H-%M}
+  
+output_dir: ${hydra:run.dir}
+# ---------------------------------------------------------#
+
+notes: ""
+
+model:
+  type: "invariant_region" 
+
+
+train:
+  bs: 5
+  epochs: 18
+  num_gpus: 1
+  num_workers: 8
+
+  num_transitions_per_epoch: 12500
+
+  log_freq: 20
+  save_freq: 5000
+
+  lr: 1e-3  # per sample, will multiply with bs and world_size, 5e-4
+  warmup_steps: 2000
+
+  grad_clip_after: 1000
+  grad_clip_value: 
+    overall: 20.0
+
+  checkpoint: ""
+
+  wandb: False
+  wandb_alert: False
+  tensorboard: False
+
+
+data:
+  grid_size: 0.005
+  db_path: ./datasets/base_training_set_raw
+  db_cache: ./datasets/base_training_set_cache # can set to empty
+  pairs_cache: ./datasets/pairs.pkl
+  aug: True
+  correspondence: False
+  align_twice: False
+  max_pts: 5000
+  color_only_instructions: False
+  include_T: False
+  noisy_mask: 0.00

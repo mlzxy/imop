@@ -1,0 +1,53 @@
+hydra:
+  job:
+    name: train_region_match
+    chdir: false
+  run:
+    dir: outputs/${hydra.job.name}/${now:%Y-%m-%d_%H-%M}
+  
+output_dir: ${hydra:run.dir}
+# ---------------------------------------------------------#
+
+notes: ""
+
+model:
+  type: "region_match" 
+
+
+train:
+  bs: 4
+  epochs: 15
+  num_gpus: 1
+  num_workers: 8
+
+  num_transitions_per_epoch: 12500
+
+  log_freq: 20
+  save_freq: 5000
+
+  lr: 1e-3  
+  warmup_steps: 2000
+
+  grad_clip_after: 1000
+  grad_clip_value: 
+    overall: 10.0
+
+  checkpoint: ""
+
+  wandb: False
+  wandb_alert: False
+  tensorboard: False
+
+
+data:
+  grid_size: 0.005
+  db_path: ./datasets/base_training_set_raw
+  db_cache: ./datasets/base_training_set_cache # can set to empty
+  pairs_cache: ./datasets/pairs.pkl
+  aug: False
+  correspondence: True
+  align_twice: True
+  max_pts: 5000
+  color_only_instructions: True
+  include_T: False
+  noisy_mask: 0.02
