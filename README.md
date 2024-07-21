@@ -12,9 +12,11 @@ pip install -r requirements.txt
 # which is necessary for some Open3D torch api
 ```
 
-Then install [Open3D](https://www.open3d.org/docs/release/compilation.html) and [Pytorch3D](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md) from source. The tested commits are  `7c0acac0a50293c52d2adb70967e729f98fa5018` and `2f11ddc5ee7d6bd56f2fb6744a16776fab6536f7` for Open3D and Pytorch3D, respectively.
+Then install [Open3D](https://www.open3d.org/docs/release/compilation.html) and [Pytorch3D](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md) from source. The tested commits are  `7c0acac0a50293c52d2adb70967e729f98fa5018` and `2f11ddc5ee7d6bd56f2fb6744a16776fab6536f7` for Open3D and Pytorch3D, respectively. 
 
-Then install torch_geometric==2.4.0, torch_cluster==1.6.1, and torch_scatter==2.1.1. You may need to download the precompiled wheel https://data.pyg.org/whl/. 
+Then install torch_geometric==2.4.0, torch_cluster==1.6.1, and torch_scatter==2.1.1. You may need to download the precompiled wheel https://data.pyg.org/whl/.
+
+> Please also install RLBench from https://github.com/mlzxy/RLBench. This branch does not read test images during evaluation (as they are not used anyway), provide color information (e.g., when stacking blocks, it makes sure the one-shot demonstration and testing scene has the same target block color), and fixes a small bug of the success criterion of the place cup task.
 
 
 ## Evaluation and Training
